@@ -12,7 +12,7 @@ const nextConfig = {
     ];
   },
   experimental: {
-    outputFileTracingRoot: fileURLToPath(new URL('../../', import.meta.url)),
+    outputFileTracingRoot: fileURLToPath(new URL('../', import.meta.url)),
   },
   async rewrites() {
     const apiOrigin = (

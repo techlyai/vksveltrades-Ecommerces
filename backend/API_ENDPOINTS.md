@@ -81,9 +81,9 @@ At API startup, migration `pending-checkout-status-v2` corrects legacy unpaid **
 Run from the repository root with the intended database configuration:
 
 ```powershell
-node scripts/cleanup-orders.mjs
-node scripts/cleanup-orders.mjs --backup
-node scripts/cleanup-orders.mjs --apply
+node backend/scripts/cleanup-orders.mjs
+node backend/scripts/cleanup-orders.mjs --backup
+node backend/scripts/cleanup-orders.mjs --apply
 ```
 
 The default command inspects only. `--apply` requires both `NODE_ENV=development` or `test` and a local database host; it refuses unconfirmed/production targets. Do not relabel production as development. Production cleanup requires explicit approval and a separately reviewed target list.

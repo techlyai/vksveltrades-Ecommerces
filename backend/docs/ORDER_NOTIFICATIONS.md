@@ -153,7 +153,7 @@ Before enabling production notifications, check with real devices:
 ## Automated verification and limits
 
 Run `npm run build`, `npm test`, and
-`node --experimental-strip-types --test apps/web/tests/*.spec.mjs` from the monorepo.
+`node --experimental-strip-types --test frontend/tests/*.spec.mjs` from the monorepo.
 API tests use isolated PostgreSQL/Garage containers and a mocked push transport, not
 the live shop or a real customer's push subscription. Tests cover persisted transitions,
 rollback/no duplicates, encrypted enrollment, ownership, retries/expired subscriptions,

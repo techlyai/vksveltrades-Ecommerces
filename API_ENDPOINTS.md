@@ -29,7 +29,7 @@ later requests require the returned capability. Legacy recovery is rate limited.
 - `DELETE /push/orders/:id` — token-authorized removal; `{endpoint}` body.
 
 Enrollment is per order and per browser; duplicate status saves do not queue another
-event. See [order notifications](docs/ORDER_NOTIFICATIONS.md) for security, migrations,
+event. See [order notifications](backend/docs/ORDER_NOTIFICATIONS.md) for security, migrations,
 browser limitations and key configuration.
 
 ## Guest wishlist authorization
@@ -45,9 +45,9 @@ Wishlist keys are hashed in PostgreSQL. Clearing browser storage loses access to
 ## Admin endpoints
 
 - `GET /admin/paint-shades` lists the entire shade card, including hidden shades.
-- `POST /admin/paint-shades` adds a shade; `PATCH /admin/paint-shades/:id` edits a stable shade record, including its number and uploaded image. Both require admin authentication. The public catalog includes only enabled shades in `paintShades`. See [shade management](docs/paint-shade-management.md).
+- `POST /admin/paint-shades` adds a shade; `PATCH /admin/paint-shades/:id` edits a stable shade record, including its number and uploaded image. Both require admin authentication. The public catalog includes only enabled shades in `paintShades`. See [shade management](frontend/docs/paint-shade-management.md).
 
-- `POST /auth/password` requires an admin Bearer token and `{currentPassword,newPassword,confirmPassword}`. The new password must contain 12–128 characters. A successful change invalidates all existing admin sessions. See [admin password changes](docs/admin-password.md).
+- `POST /auth/password` requires an admin Bearer token and `{currentPassword,newPassword,confirmPassword}`. The new password must contain 12–128 characters. A successful change invalidates all existing admin sessions. See [admin password changes](backend/docs/admin-password.md).
 
 - `GET /admin/dashboard`, `/admin/customers`, `/admin/orders`, `/admin/orders/:id`.
 - `PATCH /admin/orders/:id/status` — update fulfilment status.
@@ -81,9 +81,9 @@ At API startup, migration `pending-checkout-status-v2` corrects legacy unpaid **
 Run from the repository root with the intended database configuration:
 
 ```powershell
-node scripts/cleanup-orders.mjs
-node scripts/cleanup-orders.mjs --backup
-node scripts/cleanup-orders.mjs --apply
+node backend/scripts/cleanup-orders.mjs
+node backend/scripts/cleanup-orders.mjs --backup
+node backend/scripts/cleanup-orders.mjs --apply
 ```
 
 The default command inspects only. `--apply` requires both `NODE_ENV=development` or `test` and a local database host; it refuses unconfirmed/production targets. Do not relabel production as development. Production cleanup requires explicit approval and a separately reviewed target list.

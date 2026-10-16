@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 // Format/size conversion only: use the exact shop logo without redrawing it.
-const publicRoot = new URL('../apps/web/public/', import.meta.url);
+const publicRoot = new URL('../public/', import.meta.url);
 const source = fileURLToPath(new URL('brand/shop-logo.png', publicRoot));
 const sizes = [16, 32, 48];
 const images = await Promise.all(sizes.map((size) => sharp(source)

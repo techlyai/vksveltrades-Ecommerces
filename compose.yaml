@@ -54,7 +54,7 @@ services:
 
   api:
     build:
-      context: ./apps/api
+      context: ./backend
       dockerfile: Dockerfile
     init: true
     restart: unless-stopped
@@ -95,7 +95,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: apps/web/Dockerfile
+      dockerfile: frontend/Dockerfile
       args:
         API_INTERNAL_URL: http://api:4000
         NEXT_PUBLIC_API_URL: /api

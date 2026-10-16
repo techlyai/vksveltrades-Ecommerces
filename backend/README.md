@@ -1,4 +1,4 @@
-> This API is part of the combined [vksveltrades-Ecommerces](https://github.com/techlyai/vksveltrades-Ecommerces) repository. Use the [root README](../../README.md) and root `compose.dokploy.yaml` for the complete deployment. Standalone instructions below are optional.
+> This API is part of the combined [vksveltrades-Ecommerces](https://github.com/techlyai/vksveltrades-Ecommerces) repository. Use the [root README](../README.md) and root `compose.dokploy.yaml` for the complete deployment. Standalone instructions below are optional.
 
 # VKS Vel Traders API
 

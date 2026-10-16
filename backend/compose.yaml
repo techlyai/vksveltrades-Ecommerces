@@ -89,8 +89,8 @@ services:
 
   web:
     build:
-      context: ../..
-      dockerfile: apps/web/Dockerfile
+      context: ..
+      dockerfile: frontend/Dockerfile
       args:
         API_INTERNAL_URL: http://api:4000
         NEXT_PUBLIC_API_URL: /api

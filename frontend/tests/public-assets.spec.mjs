@@ -16,7 +16,7 @@ test('production Docker runtime copies public images and service worker alongsid
     const url = new URL(path, import.meta.url);
     if (!existsSync(url)) continue; // Standalone release has only the root Dockerfile.
     const dockerfile = readFileSync(url, 'utf8').split('AS runtime')[1];
-    assert.match(dockerfile, /COPY --from=build --chown=node:node \/app\/(?:apps\/web\/)?public \.\/(?:apps\/web\/)?public/);
+    assert.match(dockerfile, /COPY --from=build --chown=node:node \/app\/(?:frontend\/)?public \.\/(?:frontend\/)?public/);
     assert.match(dockerfile, /\.next\/static/);
   }
 });

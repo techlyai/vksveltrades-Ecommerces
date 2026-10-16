@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This repository is an npm-workspace monorepo. The Next.js storefront and admin UI live in `apps/web`; routes are in `apps/web/app`, interactive UI is in `apps/web/components`, and API helpers/types are in `apps/web/lib`. The NestJS API lives in `apps/api/src`; authentication is under `auth/`, while catalog, pricing, inventory, orders, payments, and seed data are under `store/`. Project documentation is in `README.md` and `SITE_DATA_AND_TECH_STACK.md`.
+This repository is an npm-workspace monorepo. The Next.js storefront and admin UI live in `frontend`; routes are in `frontend/app`, interactive UI is in `frontend/components`, and API helpers/types are in `frontend/lib`. The NestJS API lives in `backend/src`; authentication is under `auth/`, while catalog, pricing, inventory, orders, payments, and seed data are under `store/`. Project documentation is in `README.md` and `SITE_DATA_AND_TECH_STACK.md`.
 
 ## Build, Test, and Development Commands
 

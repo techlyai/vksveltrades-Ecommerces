@@ -1,8 +1,8 @@
-> This frontend is part of the combined [vksveltrades-Ecommerces](https://github.com/techlyai/vksveltrades-Ecommerces) repository. Use the [root README](../../README.md) and root `compose.dokploy.yaml` for the complete deployment. Standalone instructions below are optional.
+> This frontend is part of the combined [vksveltrades-Ecommerces](https://github.com/techlyai/vksveltrades-Ecommerces) repository. Use the [root README](../README.md) and root `compose.dokploy.yaml` for the complete deployment. Standalone instructions below are optional.
 
 # VKS Vel Traders frontend
 
-Next.js storefront and administrator interface. Backend source is included alongside this workspace in `apps/api` in the same repository.
+Next.js storefront and administrator interface. Backend source is included alongside this workspace in `backend` in the same repository.
 
 ## Secure order tracking and notifications
 

@@ -2,12 +2,12 @@ import { cpSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const destination = resolve(root, process.argv[2] || '.local/backend-repository');
 if (existsSync(destination) && readdirSync(destination).some((name) => name !== '.git')) {
   throw new Error('Choose an empty directory or a newly cloned empty repository. Existing files will not be overwritten.');
 }
-const source = resolve(root, 'apps/api');
+const source = resolve(root, 'backend');
 const files = ['src', 'scripts', 'package.json', 'package-lock.json', 'tsconfig.json',
   'nest-cli.json', 'Dockerfile', '.dockerignore', '.gitignore', '.env.example',
   'compose.yaml', 'README.md'];

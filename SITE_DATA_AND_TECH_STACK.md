@@ -26,6 +26,6 @@ PostgreSQL stores shop configuration in `vks_store` and individually keyed JSONB
 
 Repository: https://github.com/techlyai/vksveltrades-Ecommerces
 
-The `main` branch contains both applications under `apps/web` and `apps/api`. Use the root `compose.dokploy.yaml` to build and deploy both from the same checkout. Separate source repositories are not required. Secrets, uploads, dependencies and runtime data are excluded from Git.
+The `main` branch contains both applications under `frontend` and `backend`. Use the root `compose.dokploy.yaml` to build and deploy both from the same checkout. Separate source repositories are not required. Secrets, uploads, dependencies and runtime data are excluded from Git.
 
 One Compose stack runs separate frontend, backend, PostgreSQL and Garage containers with persistent volumes. Local storage ports bind only to loopback; the Dokploy stack keeps storage entirely private. Single-node Garage has no redundancy. Redundant production storage, verified payment-provider webhooks and dependency advisory review remain necessary before production launch.

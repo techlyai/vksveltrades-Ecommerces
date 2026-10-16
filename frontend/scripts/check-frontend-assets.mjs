@@ -4,10 +4,10 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 // Read-only smoke test against the built runtime, not Next's development server.
-// Usage: node scripts/check-frontend-assets.mjs http://127.0.0.1:PORT [public-directory]
+// Usage: node frontend/scripts/check-frontend-assets.mjs http://127.0.0.1:PORT [public-directory]
 const origin = process.argv[2];
 assert.ok(origin, 'Provide the URL of a running frontend container.');
-const publicRoot = resolve(process.argv[3] || 'apps/web/public');
+const publicRoot = resolve(process.argv[3] || 'frontend/public');
 const assets = [
   ...readdirSync(resolve(publicRoot, 'banners')).map((name) => `banners/${name}`),
   ...readdirSync(resolve(publicRoot, 'brand')).map((name) => `brand/${name}`),

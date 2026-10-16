@@ -6,10 +6,10 @@ The maintained branch is `main`. Separate frontend/backend Git repositories are 
 
 ## Project structure
 
-- `apps/web`: Next.js storefront, checkout, secure guest receipts and admin interface.
-- `apps/api`: NestJS authentication, catalog, server-side pricing, inventory, orders and payments.
-- `docs`: feature and configuration guides.
-- `scripts`: local development, asset checks and guarded order cleanup tools.
+- `frontend`: Next.js storefront, checkout, secure guest receipts and admin interface.
+- `backend`: NestJS authentication, catalog, server-side pricing, inventory, orders and payments.
+- `frontend/docs` and `backend/docs`: feature and configuration guides.
+- `frontend/scripts` and `backend/scripts`: app utilities, development and guarded cleanup tools.
 - `compose.yaml`: local Docker stack with storage ports bound to loopback.
 - `compose.dokploy.yaml`: production Dokploy stack; both application images build from this repository.
 
@@ -37,8 +37,8 @@ Catalog, product prices, discounts, delivery, GST, stock and payment state are a
 ```sh
 npm run build
 npm test
-node --test apps/web/tests/*.spec.mjs
-node --test apps/api/dist/store/order-lifecycle.spec.js scripts/order-cleanup-policy.spec.mjs
+node --test frontend/tests/*.spec.mjs
+node --test backend/dist/store/order-lifecycle.spec.js backend/scripts/order-cleanup-policy.spec.mjs
 ```
 
 `npm test` builds the API and provisions disposable PostgreSQL/Garage containers. Docker must be running; integration tests never use the normal shop database. Frontend and lifecycle/cleanup unit tests can run without Docker after installing/building.
@@ -65,4 +65,4 @@ Eligible customers can cancel using their secure receipt token. Cancellation rel
 
 Startup migration `pending-checkout-status-v2` normalizes legacy payment values and corrects unpaid Order Placed labels in PostgreSQL JSON records. A persisted order counter prevents number reuse after cleanup. Existing order data is preserved; cleanup is never automatic.
 
-See [API endpoints and cleanup safeguards](API_ENDPOINTS.md), [backend configuration and migration](apps/api/README.md), and [order notifications](docs/ORDER_NOTIFICATIONS.md).
+See [API endpoints and cleanup safeguards](API_ENDPOINTS.md), [backend configuration and migration](backend/README.md), and [order notifications](backend/docs/ORDER_NOTIFICATIONS.md).
