@@ -1,0 +1,16 @@
+node_modules/
+.npm-cache/
+.next/
+.next-dev/
+dist/
+coverage/
+.env
+.env.local
+*.log
+data/
+.DS_Store
+.openai/
+.local/
+*.tsbuildinfo
+.env.*
+!.env.example

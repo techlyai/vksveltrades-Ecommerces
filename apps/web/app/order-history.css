@@ -1,0 +1,19 @@
+.order-history-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.order-history-actions p { flex: 1 1 260px; margin: 0; color: #66748e; font-size: 14px; line-height: 1.6; }
+.order-history-actions button, .order-history-buttons button { min-height: 44px; padding: 10px 16px; border: 1px solid #d6e0f2; border-radius: 12px; background: #fff; color: #2457ce; font: inherit; font-weight: 600; }
+.order-history-actions button:disabled, .order-history-buttons button:disabled { opacity: .5; cursor: not-allowed; }
+.order-history-select { display: flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 8px; font-size: 13px; cursor: pointer; }
+.order-history-select input[type=checkbox] { width: 20px; height: 20px; margin: 0; padding: 0; accent-color: #2457ce; }
+.admin-form-dialog:has(.order-history-confirm) { width: min(520px, calc(100% - 24px)); }
+.order-history-confirm { padding: 24px; color: #15213b; }
+.order-history-confirm h2 { margin: 0 0 16px; font-size: 22px; }
+.order-history-confirm p { line-height: 1.6; }
+.order-history-confirm ul { max-height: 180px; overflow: auto; padding-left: 24px; }
+.order-history-confirm li { padding: 4px 0; }
+.order-history-confirm [role=alert] { color: #b42318; }
+.order-history-buttons { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin-top: 24px; }
+.order-history-buttons button:last-child { background: #2457ce; color: #fff; }
+@media (max-width: 600px) {
+  .order-history-actions button { width: 100%; }
+  .order-history-confirm { padding: 20px; }
+}

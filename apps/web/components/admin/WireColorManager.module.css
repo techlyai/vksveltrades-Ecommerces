@@ -1,0 +1,32 @@
+.manager { display: grid; gap: 20px; min-width: 0; color: #152642; }
+.heading { display: flex; align-items: start; gap: 16px; flex-wrap: wrap; }
+.heading > div { flex: 1 1 300px; }
+.heading > button,.fields > button { padding: 10px 16px; min-height: 42px; border: 1px solid #c5d1e1; border-radius: 10px; background: white; color: #152642; font: inherit; }
+.manager h2,.manager h3,.editor h2 { margin: 0 0 8px; }
+.manager p,.editor p { line-height: 1.5; }
+.search { display: grid; gap: 8px; max-width: 540px; }
+.search input,.inputs input { width: 100%; min-width: 0; padding: 10px 12px; border: 1px solid #c5d1e1; border-radius: 10px; background: white; color: #152642; font: inherit; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,320px),1fr)); gap: 16px; }
+.cards article { display: grid; align-content: start; gap: 12px; border: 1px solid #dce3ee; border-radius: 18px; background: white; padding: 20px; min-width: 0; overflow-wrap: anywhere; }
+.cards button { white-space: normal; min-height: 44px; padding: 10px 16px; border-radius: 10px; }
+.swatches,.presets { display: flex; flex-wrap: wrap; gap: 10px; }
+.swatches span,.presets button { display: inline-flex; gap: 8px; align-items: center; border: 1px solid #d6deeb; padding: 8px 10px; border-radius: 10px; background: white; color: #152642; }
+.swatches i,.presets i { display: inline-block; width: 22px; height: 22px; border-radius: 50%; border: 1px solid #9ca3af; flex-shrink: 0; }
+.presets button:disabled { opacity: .45; cursor: default; }
+.notice { padding: 12px 16px; border: 1px solid #bfdbfe; background: #eff6ff; border-radius: 12px; }
+.editor { width: min(760px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); display: flex; flex-direction: column; background: white; border-radius: 18px; color: #152642; overflow: hidden; }
+.editor header { padding: 20px; display: flex; gap: 12px; justify-content: space-between; border-bottom: 1px solid #dce3ee; }
+.editor header p { margin: 0; }
+.editor header button { align-self: start; background: #f1f5f9; border: 0; border-radius: 8px; padding: 8px 12px; font-size: 22px; }
+.scroll { overflow-y: auto; min-height: 0; padding: 0 20px 20px; overscroll-behavior: contain; }
+.scroll > fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.fields { display: grid; gap: 16px; min-width: 0; }
+.colorRow { border: 1px solid #c5d1e1; border-radius: 12px; padding: 16px; margin: 0; min-width: 0; }
+.colorRow legend { padding: 0 8px; font-weight: 600; }
+.inputs { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin-bottom: 12px; }
+.inputs label { display: grid; gap: 6px; }
+.inputs input[type=color] { height: 44px; padding: 4px; }
+.colorRow > button { background: white; border: 1px solid #c5d1e1; padding: 8px 12px; border-radius: 8px; color: #b42318; }
+.editor footer { display: flex; justify-content: flex-end; gap: 12px; padding: 16px 20px; border-top: 1px solid #dce3ee; background: white; color: #152642; }
+.editor footer button { padding: 10px 16px; border-radius: 10px; border: 1px solid #c5d1e1; }
+@media(max-width: 480px) { .inputs { grid-template-columns: minmax(0,1fr); } .editor header,.scroll,.editor footer { padding-left: 14px; padding-right: 14px; } }

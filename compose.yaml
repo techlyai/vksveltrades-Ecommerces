@@ -1,0 +1,151 @@
+name: vksveltraders
+# Single Dokploy deployment. Requires Docker Compose 2.23.1+.
+# PostgreSQL stores shop records; Garage stores uploaded images.
+services:
+  postgres:
+    image: postgres:17-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: vksveltraders
+      POSTGRES_USER: vks
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      APP_DATABASE_PASSWORD: ${APP_DATABASE_PASSWORD:?Set APP_DATABASE_PASSWORD}
+    configs:
+      - source: postgres-init
+        target: /docker-entrypoint-initdb.d/10-vks-app.sh
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    networks:
+      - storage
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vks -d vksveltraders"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  garage:
+    image: dxflrs/garage:v2.4.1
+    restart: unless-stopped
+    entrypoint: ["/garage"]
+    command: ["server", "--single-node", "--default-bucket"]
+    environment:
+      GARAGE_RPC_SECRET: ${GARAGE_RPC_SECRET:?Set GARAGE_RPC_SECRET}
+      GARAGE_DEFAULT_ACCESS_KEY: ${GARAGE_ACCESS_KEY:?Set GARAGE_ACCESS_KEY}
+      GARAGE_DEFAULT_SECRET_KEY: ${GARAGE_SECRET_KEY:?Set GARAGE_SECRET_KEY}
+      GARAGE_DEFAULT_BUCKET: vks-images
+    configs:
+      - source: garage-config
+        target: /etc/garage.toml
+    volumes:
+      - garage-meta:/var/lib/garage/meta
+      - garage-data:/var/lib/garage/data
+    ports:
+      - "127.0.0.1:${GARAGE_PORT:-3900}:3900"
+    networks:
+      - storage
+    healthcheck:
+      test: ["CMD", "/garage", "status"]
+      interval: 15s
+      timeout: 10s
+      start_period: 30s
+      retries: 10
+
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    init: true
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "4000"
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD}
+      AUTH_SECRET: ${AUTH_SECRET:?Set AUTH_SECRET}
+      VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY:-}
+      VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY:-}
+      VAPID_SUBJECT: ${VAPID_SUBJECT:-}
+      PUSH_ENCRYPTION_KEY: ${PUSH_ENCRYPTION_KEY:-}
+      FRONTEND_URL: ${FRONTEND_URL:-https://vksveltraders.techlyai.in}
+      PAYMENT_UPI_ID: ${PAYMENT_UPI_ID:-}
+      DATABASE_URL: postgresql://vks_app:${APP_DATABASE_PASSWORD}@postgres:5432/vksveltraders
+      DATABASE_SCHEMA: vks
+      S3_ENDPOINT: http://garage:3900
+      S3_REGION: garage
+      S3_BUCKET: vks-images
+      S3_ACCESS_KEY_ID: ${GARAGE_ACCESS_KEY}
+      S3_SECRET_ACCESS_KEY: ${GARAGE_SECRET_KEY}
+      S3_FORCE_PATH_STYLE: "true"
+    volumes:
+      # Recovery/import source only. The running API never reads/writes these files.
+      - store-data:/legacy:ro
+    expose:
+      - "4000"
+    networks:
+      - default
+      - storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+      garage:
+        condition: service_healthy
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        API_INTERNAL_URL: http://api:4000
+        NEXT_PUBLIC_API_URL: /api
+    init: true
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: 0.0.0.0
+    expose:
+      - "3000"
+    ports:
+      - "127.0.0.1:${WEB_PORT:-3000}:3000"
+    networks:
+      - default
+    depends_on:
+      api:
+        condition: service_healthy
+
+configs:
+  postgres-init:
+    content: |
+      #!/bin/sh
+      psql -v ON_ERROR_STOP=1 --username "$$POSTGRES_USER" --dbname "$$POSTGRES_DB" --set=app_password="$$APP_DATABASE_PASSWORD" <<'SQL'
+      SELECT format('CREATE ROLE vks_app LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE PASSWORD %L', :'app_password')
+      WHERE NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'vks_app') \gexec
+      CREATE SCHEMA IF NOT EXISTS vks AUTHORIZATION vks_app;
+      REVOKE ALL ON SCHEMA vks FROM PUBLIC;
+      SQL
+  garage-config:
+    content: |
+      metadata_dir = "/var/lib/garage/meta"
+      data_dir = "/var/lib/garage/data"
+      db_engine = "sqlite"
+      replication_factor = 1
+      rpc_bind_addr = "0.0.0.0:3901"
+      rpc_public_addr = "127.0.0.1:3901"
+
+      [s3_api]
+      s3_region = "garage"
+      api_bind_addr = "0.0.0.0:3900"
+
+networks:
+  default:
+  storage:
+    # Local development publishes storage only on loopback for the host API.
+    # The backend-repository Dokploy Compose keeps this network internal.
+
+volumes:
+  postgres-data:
+  garage-meta:
+  garage-data:
+  store-data:

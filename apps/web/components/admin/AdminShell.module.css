@@ -1,0 +1,48 @@
+.frame:global(.admin-classic) { position: fixed; inset: 0; display: grid; grid-template-columns: 252px minmax(0, 1fr); width: 100%; height: 100dvh; min-height: 0; overflow: hidden; background: #f5f7fb; }
+.frame:global(.admin-classic) > :global(.admin-sidebar) { display: flex; flex-direction: column; position: relative; height: 100%; min-height: 0; padding: 24px 14px 16px; overflow: hidden; background: #fff; border-right: 1px solid #e0e6f0; }
+.frame:global(.admin-classic) .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; padding: 0 8px 22px; color: #13254d; text-decoration: none; }
+.frame:global(.admin-classic) .brand > span { display: block; min-width: 0; width: auto; height: auto; border-radius: 0; background: none; color: inherit; }
+.frame:global(.admin-classic) .brand b { display: block; font-size: 14px; line-height: 1.5; font-weight: 800; overflow-wrap: anywhere; }
+.frame:global(.admin-classic) .brand small { display: block; margin-top: 3px; font-size: 11px; color: #8790a0; }
+.frame:global(.admin-classic) .brand img { display: block; flex-shrink: 0; width: 48px; height: 48px; padding: 0; object-fit: contain; border: 0; border-radius: 0; }
+.frame:global(.admin-classic) :global(.admin-sidebar) nav { display: block; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: thin; padding: 0 2px; }
+.navGroup { margin-bottom: 14px; }
+.frame:global(.admin-classic) .navGroup > span { display: block; padding: 8px 12px; font-size: 10px; font-weight: 700; color: #8790a0; letter-spacing: .08em; }
+.frame:global(.admin-classic) .navItem { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; margin: 3px 0; padding: 11px 12px; background: transparent; border: 0; border-radius: 10px; color: #53627d; text-align: left; font-size: 12px; font-weight: 650; line-height: 1.5; }
+.frame:global(.admin-classic) .navItem > svg { flex-shrink: 0; width: 18px; height: 18px; color: #8797b0; }
+.frame:global(.admin-classic) .navItem > span { min-width: 0; flex: 1; }
+.frame:global(.admin-classic) .navItem em { display: grid; place-items: center; min-width: 20px; height: 20px; padding-inline: 4px; border-radius: 99px; background: #2156e8; color: #fff; font-size: 10px; font-style: normal; }
+.frame:global(.admin-classic) .navItem:hover { background: #f4f6fb; }
+.frame:global(.admin-classic) .navItem.active { color: #2156e8; background: #eaf0ff; }
+.frame:global(.admin-classic) .navItem.active > svg { color: #2156e8; }
+.frame:global(.admin-classic) .account { flex-shrink: 0; margin: 0; padding: 14px 0 0; border-top: 1px solid #e0e6f0; }
+.frame:global(.admin-classic) .account :global(.admin-owner) { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; padding: 12px; border-radius: 14px; background: #f2f5fb; }
+.frame:global(.admin-classic) .account :global(.admin-owner) > span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #3468ff, #1d4ed8); color: #fff; font-size: 18px; font-weight: 700; }
+.frame:global(.admin-classic) .account b { font-size: 13px; color: #13254d; }
+.frame:global(.admin-classic) .account small { font-size: 11px; color: #8790a0; }
+.frame:global(.admin-classic) .account > :is(a, button) { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 40px; margin: 0; padding: 8px 12px; border: 0; background: none; color: #53627d; font-size: 12px; text-decoration: none; }
+.frame:global(.admin-classic) .workspace { display: flex; flex-direction: column; height: 100%; min-height: 0; min-width: 0; overflow: hidden; }
+.frame:global(.admin-classic) .header { position: relative; top: auto; z-index: 30; display: flex; flex: 0 0 auto; align-items: center; justify-content: space-between; gap: 20px; min-height: 92px; height: auto; padding: 20px 32px; background: #f5f7fb; border-bottom: 1px solid #e0e6f0; }
+.frame:global(.admin-classic) .header h1 { margin: 0; font-size: 27px; font-weight: 800; line-height: 1.25; letter-spacing: -.04em; color: #17233c; }
+.frame:global(.admin-classic) .header p { margin: 7px 0 0; font-size: 12px; color: #8797b0; }
+.frame:global(.admin-classic) .actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.frame:global(.admin-classic) .actions :is(a, button) { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 10px 14px; background: #fff; border: 1px solid #dce3ef; border-radius: 12px; color: #17233c; font-size: 12px; font-weight: 650; text-decoration: none; white-space: nowrap; }
+.frame:global(.admin-classic) .content { flex: 1 1 0; min-height: 0; min-width: 0; width: 100%; padding: 24px 32px 32px; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+@media (min-width: 761px) and (max-width: 1100px) {
+  .frame:global(.admin-classic) { grid-template-columns: 222px minmax(0, 1fr); }
+  .frame:global(.admin-classic) .header { padding: 20px 22px; }
+  .frame:global(.admin-classic) .content { padding: 20px 22px; }
+  .frame:global(.admin-classic) .actions button { display: none; }
+}
+@media (max-width: 760px) {
+  .frame:global(.admin-classic) { position: relative; inset: auto; display: block; width: 100%; min-height: 100dvh; height: auto; overflow: visible; }
+  .frame:global(.admin-classic) .workspace { height: auto; overflow: visible; }
+  .frame:global(.admin-classic) .header { position: sticky; top: 0; z-index: 30; padding: 18px 16px 18px 72px; min-height: 86px; gap: 8px; }
+  .frame:global(.admin-classic) .header h1 { font-size: 23px; }
+  .frame:global(.admin-classic) .header p { font-size: 11px; line-height: 1.5; }
+  .frame:global(.admin-classic) .actions { display: none; }
+  .frame:global(.admin-classic) .content { padding: 18px 12px 28px; overflow: visible; }
+  .frame:global(.admin-classic) :global(.admin-mobile-menu) { position: fixed; z-index: 40; }
+  .frame:global(.admin-classic) :global(.admin-navigation-dialog) .brand { padding-top: 16px; padding-right: 24px; }
+  .frame:global(.admin-classic) .navItem { min-height: 46px; font-size: 13px; }
+}

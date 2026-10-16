@@ -1,0 +1,13 @@
+**/node_modules
+**/.next
+**/.next-dev
+**/dist
+**/data
+**/.env*
+**/*.log
+**/*.tsbuildinfo
+.git
+.local
+.openai
+.npm-cache
+coverage

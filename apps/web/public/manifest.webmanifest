@@ -1,0 +1,11 @@
+{
+  "id": "/",
+  "name": "VKS VEL TRADERS",
+  "short_name": "VKS Traders",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#b4862b",
+  "icons": [{ "src": "/brand/shop-logo.png", "sizes": "640x640", "type": "image/png", "purpose": "any" }]
+}
